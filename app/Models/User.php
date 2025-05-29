@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'profile_photo_path',
     ];
 
     /**
@@ -44,5 +46,61 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Check if the user is an admin.
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Check if the user is a barangay admin.
+     */
+    public function isBarangayAdmin(): bool
+    {
+        return $this->role === 'barangay_admin';
+    }
+
+    /**
+     * Check if the user is an encoder.
+     */
+    public function isEncoder(): bool
+    {
+        return $this->role === 'encoder';
+    }
+
+    /**
+     * Check if the user is a viewer.
+     */
+    public function isViewer(): bool
+    {
+        return $this->role === 'viewer';
+    }
+
+    /**
+     * Check if the user can edit data.
+     */
+    public function canEdit(): bool
+    {
+        return in_array($this->role, ['admin', 'encoder']);
+    }
+
+    /**
+     * Check if the user can add data.
+     */
+    public function canAdd(): bool
+    {
+        return in_array($this->role, ['admin', 'encoder']);
+    }
+
+    /**
+     * Check if the user can delete data.
+     */
+    public function canDelete(): bool
+    {
+        return $this->role === 'admin';
     }
 }

@@ -1,0 +1,11 @@
+/* Remove whitespace between table cells */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/* Ensure tbody doesn't add unwanted whitespace */
+tbody, tr {
+    page-break-inside: avoid;
+    break-inside: avoid;
+}

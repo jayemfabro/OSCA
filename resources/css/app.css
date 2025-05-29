@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import 'components/table.css';
+@import 'components/buttons.css';
+@import 'components/forms.css';
+@import 'components/ui.css';
+@import 'components/custom.css';
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    body {
+        @apply bg-gray-50 text-gray-900;
+        font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-display tracking-tight;
+    }
+
+    :focus-visible {
+        @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+    }
+}
+
+@layer utilities {
+    .text-shadow {
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-secondary-600;
+    }
+}

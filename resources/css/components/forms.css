@@ -1,0 +1,45 @@
+@layer components {
+    .form-group {
+        @apply space-y-2 mb-4;
+    }
+
+    .form-label {
+        @apply block text-sm font-medium text-gray-700;
+    }
+
+    .form-input {
+        @apply block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm transition-colors duration-200;
+    }
+
+    .form-select {
+        @apply block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm;
+    }
+
+    .form-checkbox {
+        @apply h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500;
+    }
+
+    .form-radio {
+        @apply h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-500;
+    }
+
+    .form-helper {
+        @apply mt-1 text-sm text-gray-500;
+    }
+
+    .form-error {
+        @apply mt-1 text-sm text-red-600;
+    }
+
+    .input-group {
+        @apply flex rounded-lg shadow-sm;
+    }
+
+    .input-group-text {
+        @apply inline-flex items-center px-3 rounded-l-lg border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm;
+    }
+
+    .input-group .form-input {
+        @apply rounded-l-none;
+    }
+}

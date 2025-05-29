@@ -2,6 +2,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
+import Sidebar from '@/Components/Sidebar';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
@@ -10,28 +11,38 @@ export default function AuthenticatedLayout({ header, children }) {
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
+    const [sidebarExpanded, setSidebarExpanded] = useState(true);
+    
+    const toggleSidebar = () => {
+        setSidebarExpanded(!sidebarExpanded);
+    };
 
     return (
-        <div className="min-h-screen bg-gray-100">
-            <nav className="border-b border-gray-100 bg-white">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="flex h-16 justify-between">
-                        <div className="flex">
-                            <div className="flex shrink-0 items-center">
-                                <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
-                                </Link>
-                            </div>
+        <div className="min-h-screen bg-gray-50 flex">
+            {/* Sidebar - visible on all screens now that we've removed header navigation */}
+            <Sidebar 
+                className="fixed h-screen shadow-lg" 
+                expanded={sidebarExpanded} 
+                setExpanded={setSidebarExpanded} 
+                toggleSidebar={toggleSidebar}
+            />
+                
+            <div className={`flex-1 transition-all duration-300 ease-in-out backdrop-blur-sm ${sidebarExpanded ? 'md:ml-64' : 'md:ml-20'}`}> {/* Responsive margin based on sidebar state */}
+                <nav className="border-b border-gray-100 bg-white shadow-sm">
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div className="flex h-16 justify-between">
+                            <div className="flex">
+                                <div className="flex shrink-0 items-center">
+                                    <Link href="/">
+                                        <ApplicationLogo className="block h-10 w-auto fill-current text-primary-600 transition-transform hover:scale-105" />
+                                    </Link>
+                                </div>
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
-                                    href={route('dashboard')}
-                                    active={route().current('dashboard')}
-                                >
-                                    Dashboard
-                                </NavLink>
+                                {/* Navigation links moved to sidebar */}
+                                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                    {/* Intentionally empty - navigation is now in sidebar */}
+                                </div>
                             </div>
-                        </div>
 
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
                             <div className="relative ms-3">
@@ -128,12 +139,7 @@ export default function AuthenticatedLayout({ header, children }) {
                     }
                 >
                     <div className="space-y-1 pb-3 pt-2">
-                        <ResponsiveNavLink
-                            href={route('dashboard')}
-                            active={route().current('dashboard')}
-                        >
-                            Dashboard
-                        </ResponsiveNavLink>
+                        {/* Navigation links moved to sidebar */}
                     </div>
 
                     <div className="border-t border-gray-200 pb-1 pt-4">
@@ -171,6 +177,7 @@ export default function AuthenticatedLayout({ header, children }) {
             )}
 
             <main>{children}</main>
+            </div>
         </div>
     );
 }
